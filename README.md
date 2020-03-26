@@ -19,6 +19,10 @@
 
    - Serial monitor (STRG-D --> soft reboot --> REPL-mode):
    
+           sudo usermod -a -G dialout $USER
+           
+           rshell --buffer-size=30 -p /dev/ttyUSB0 -a -e nano
+           
            picocom /dev/ttyUSB0 -b 115200
               
            import os
