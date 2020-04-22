@@ -42,5 +42,43 @@
            
         picocom /dev/ttyUSB0 -b 115200
         --> cancel session press STRG + A + X  --> Thanks for using picocom
-           
+
+
+### MQTT
+#### API reference
+        https://github.com/micropython/micropython-lib/tree/master/umqtt.simple
+        connect(...) -  Connect to a server. Returns True if this connection uses
+                        persisten session stored on a server (this will be always False
+                        if clean_session=True argument is used (default)).
+        disconnect() -  Disconnect from a server, release resources
+        publish() -     Publish a message
+        subscribe() -   Subscribe to a topic
+        set_callback()- Set callback for received subscription messages
+        set_last_will() Set MQTT "last will" message. Should be called before connect()
+        wait_msg() -    Wait for a server message. A subscription message will be delivered
+                        to a callback set with set_callback(), any other messages will be
+                        processed internally
+        check_msg() -   Check if there's pending message from server
+                        If yes, process the same way as wait_msg(), if not, return immediately
+                        
+        MQTT client with automatic reconnect
+        There's a separate umqtt.robust module which builds on umqtt.simple and adds
+        automatic reconnect support in case of network errors.
+        Please see its documentation for further details.
+        
+#### publish example --> example.py
+        from umqtt.simple import MQTTClient
+        # Test reception e.g. with:
+        # mosquitto_sub -t foo_topic
+
+        def main(server="localhost"):
+            c = MQTTClient("umqtt_client", server)
+            c.connect()
+            c.publish(b"foo_topic", b"hello")
+            c.disconnect()
+
+        if __name__ == "__main__":
+            main()
+
+
 ### end
