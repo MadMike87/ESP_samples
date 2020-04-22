@@ -1,36 +1,46 @@
-# MicroPython
-## Getting the firmware
-       http://micropython.org/download#esp8266
+# LED blink
+## ESP8266, ESP32
+        connect ESP via USB cable to PC       
+        alias espdev='ls /dev/ttyU*'
+        espdev --> /dev/ttyUSB0  --> ESP is connected to ttyUSB0
 
-- For best results it is recommended to first erase the entire flash
-   of your device before putting on new MicroPython firmware.
+### Serial monitor
+        alias espsh='rshell --buffer-size=30 -p /dev/ttyUSB0 -a -e nano'
+        espsh
+            Using buffer-size of 30
+            Connecting to /dev/ttyUSB0 (buffer-size 30)...
+            Trying to connect to REPL  connected
+            Testing if ubinascii.unhexlify exists ... Y
+            Retrieving root directories ... /boot.py/ /main.py/
+            Setting time ... Apr 22, 2020 12:10:06
+            Evaluating board_name ... pyboard
+            Retrieving time epoch ... Jan 01, 2000
+            Welcome to rshell. Use Control-D (or the exit command) to exit rshell.
+            
+            ls -al /pyboard
+            954 Dec 31 1999  boot.py
+            681 Dec 31 1999  main.py
 
-   - pip3 install esptool
-   - erase the flash:
-      
-           esptool.py --port /dev/ttyUSB0 erase_flash
-
-   - deploy the new firmware using:
-   
-           esptool.py --port /dev/ttyUSB0 --baud 115200 write_flash --flash_size=detect 0 esp8266-20191220-v1.12.bin
+            cat /pyboard/main.py
+            
+            repl --> STRG +D --> soft reboot --> start boot.py and main.py
+            or
+            import os
+            os.listdir()
+            x=open('boot.py','r')
+            x.read()
            
-           daily image:
-           esptool.py --port /dev/ttyUSB0 --baud 115200 write_flash --flash_size=detect 0 /home/nuc8/01_smarthome/06_mcu/01_Micropython/esp8266-20200213-v1.12-167-gf020eac6a.bin
+            os.chdir('01_smarthome')
+            os.listdir()
 
-   - Serial monitor (STRG-D --> soft reboot --> REPL-mode):
-   
-           picocom /dev/ttyUSB0 -b 115200
-              
-           import os
-           os.listdir()
-           x=open('boot.py','r')
-           x.read()
+            from machine import Pin
+            led=Pin(2, Pin.OUT)
+            led.off()
+            led.on()
+
+        or
            
-           os.chdir('01_smarthome')
-           os.listdir()
-
-           from machine import Pin
-           led=Pin(2, Pin.OUT)
-           led.off()
-           led.on()
+        picocom /dev/ttyUSB0 -b 115200
+        --> cancel session press STRG + A + X  --> Thanks for using picocom
+           
 ### end
