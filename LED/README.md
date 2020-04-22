@@ -18,13 +18,16 @@
             Welcome to rshell. Use Control-D (or the exit command) to exit rshell.
             
             ls -al /pyboard
-            954 Dec 31 1999  boot.py
-            681 Dec 31 1999  main.py
+            954 Dec 31 1999  a.py
+            681 Dec 31 1999  led_blink.py
 
             cat /pyboard/main.py
             
             repl --> STRG +D --> soft reboot --> start boot.py and main.py
+            import led_blink
+            
             or
+            
             import os
             os.listdir()
             x=open('boot.py','r')
