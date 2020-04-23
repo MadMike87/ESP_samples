@@ -10,6 +10,6 @@ while True:  # while loop that gets the temperature 5 seconds
     ds_sensor.convert_temp()  # You need to call convert_temp() each time you want the temperature
     time.sleep_ms(750)  # Add a delay of 750 ms to give enough time to convert the temperature
     for sensor in getsensors:
-        print(sensor)
-        print(ds_sensor.read_temp(sensor))
+        temp = ds_sensor.read_temp(sensor)
+        print(temp)
     time.sleep(5)

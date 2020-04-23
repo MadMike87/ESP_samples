@@ -1,5 +1,6 @@
-
 from time import sleep
+import onewire
+import ds18x20
 
 ##########################################################################
 # https://randomnerdtutorials.com/micropython-mqtt-esp32-esp8266/
@@ -67,7 +68,11 @@ except OSError as e:
     # the ESP by calling the restart_and_reconnect() function
     restart_and_reconnect()
 
-msg = b'Hello from WPL to FHEM-server'
+# prepare DS18B20 temperatur sensor
+ds_pin = machine.Pin(4)  # we are reading the temperature from GPIO 4
+ds_sensor = ds18x20.DS18X20(onewire.OneWire(ds_pin))
+getsensors = ds_sensor.scan()  # the scan() function retrieve all connected DS18B20 sensor addresses
+print('Found DS18B20 Sensors: ', getsensors, '\n')
 
 while True:
     # the while loop is where we’ll be receiving and publishing the messages.
@@ -85,9 +90,15 @@ while True:
         # To publish a message  we need to apply the publish() method on
         # the client and pass as arguments, the topic and the message.
         # The topic_pub variable was set to '/Haus/EG/WZ/ESP8266' in boot.py
-        print('\npublish %s to MQTT-broker' % (msg))
-        client.publish(topic_pub, msg)
-        sleep(10)
+        ds_sensor.convert_temp()  # You need to call convert_temp() each time you want the temperature
+        sleep(1)  # Add a delay of 1s to give enough time to convert the temperature
+        for sensor in getsensors:
+            temp = ds_sensor.read_temp(sensor)
+            print(temp)
+            print('\npublish %s to MQTT-broker' % (temp))
+            client.publish(topic_pub, str(temp))
+            sleep(5)
+        sleep(5)
     # If something unexpected happens, call restart_and_reconnect() function.
     except OSError as e:
         restart_and_reconnect()
