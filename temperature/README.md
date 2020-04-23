@@ -27,6 +27,15 @@
             or
             import os
             os.listdir()
+
+            os.chdir('umqtt.simple')    --> change direcory to umqtt.simple 
+
+            os.remove('umqtt.simple')   --> delete direcory umqtt.simple
+
+            os.remove('main.py')        --> delete file main.py
+            
+            os.listdir()
+            
             x=open('boot.py','r')
             x.read()
            
@@ -47,6 +56,10 @@
 ### MQTT
 #### API reference
         https://github.com/micropython/micropython-lib/tree/master/umqtt.simple
+        
+        rename simple.py file from directory umqtt.simple to umqttsimple.py
+        and copy it to root  / directrory from ESP-device (its easiser to use)
+        
         connect(...) -  Connect to a server. Returns True if this connection uses
                         persisten session stored on a server (this will be always False
                         if clean_session=True argument is used (default)).
@@ -67,7 +80,10 @@
         Please see its documentation for further details.
         
 #### publish example --> example.py
-        from umqtt.simple import MQTTClient
+        rename simple.py file from directory umqtt.simple to umqttsimple.py
+        and copy it to root  / directrory from ESP-device (its easiser to use)
+        
+        from umqttsimple import MQTTClient
         # Test reception e.g. with:
         # mosquitto_sub -t foo_topic
 
