@@ -4,7 +4,7 @@
         *) from directory "umqtt.simple/umqtt" rename simple.py to umqttsimple.py
         *) copy umqttsimple.py to ESP-device in root directory
            copy umqttsimple.py /pyboard/
-        *) copy boot.py /pyboard/main.py
+        *) copy boot.py /pyboard/
         *) copy main_mqtt_temp.py /pyboard/main.py
 
 ### Serial monitor
