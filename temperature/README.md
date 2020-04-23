@@ -1,10 +1,17 @@
-# Temperature
-## ESP8266, ESP32
+# Send Temperature via MQTT to FHEM-Server
+# main_mqtt_temp.py
+        *) to use MQTT download from https://github.com/micropython/micropython-lib
+        *) from directory "umqtt.simple/umqtt" rename simple.py to umqttsimple.py
+        *) copy umqttsimple.py to ESP-device in root directory
+           copy umqttsimple.py /pyboard/
+        *) copy boot.py /pyboard/main.py
+        *) copy main_mqtt_temp.py /pyboard/main.py
+
+### Serial monitor
         connect ESP via USB cable to PC       
         alias espdev='ls /dev/ttyU*'
         espdev --> /dev/ttyUSB0  --> ESP is connected to ttyUSB0
 
-### Serial monitor
         alias espsh='rshell --buffer-size=30 -p /dev/ttyUSB0 -a -e nano'
         espsh
             Using buffer-size of 30
@@ -78,23 +85,4 @@
         There's a separate umqtt.robust module which builds on umqtt.simple and adds
         automatic reconnect support in case of network errors.
         Please see its documentation for further details.
-        
-#### publish example --> example.py
-        rename simple.py file from directory umqtt.simple to umqttsimple.py
-        and copy it to root  / directrory from ESP-device (its easiser to use)
-        
-        from umqttsimple import MQTTClient
-        # Test reception e.g. with:
-        # mosquitto_sub -t foo_topic
-
-        def main(server="localhost"):
-            c = MQTTClient("umqtt_client", server)
-            c.connect()
-            c.publish(b"foo_topic", b"hello")
-            c.disconnect()
-
-        if __name__ == "__main__":
-            main()
-
-
 ### end
