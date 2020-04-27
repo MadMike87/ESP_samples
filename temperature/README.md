@@ -3,9 +3,9 @@
         *) to use MQTT download from https://github.com/micropython/micropython-lib
         *) from directory "umqtt.simple/umqtt" rename simple.py to umqttsimple.py
         *) copy umqttsimple.py to ESP-device in root directory
-           copy umqttsimple.py /pyboard/
-        *) copy boot.py /pyboard/
-        *) copy main_mqtt_temp.py /pyboard/main.py
+           cp umqttsimple.py /pyboard/
+        *) cp boot.py /pyboard/
+        *) cp main_mqtt_temp.py /pyboard/main.py
 
 ### Serial monitor
         connect ESP via USB cable to PC       
