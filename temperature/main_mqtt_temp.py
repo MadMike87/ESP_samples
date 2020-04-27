@@ -98,7 +98,7 @@ while True:
             print('\npublish %s to MQTT-broker' % (temp))
             client.publish(topic_pub, str(temp))
             sleep(5)
-        sleep(5)
+        sleep(600)  # wait 10 minutes
     # If something unexpected happens, call restart_and_reconnect() function.
     except OSError as e:
         restart_and_reconnect()

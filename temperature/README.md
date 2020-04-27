@@ -85,4 +85,8 @@
         There's a separate umqtt.robust module which builds on umqtt.simple and adds
         automatic reconnect support in case of network errors.
         Please see its documentation for further details.
+
+# Wiring ESP8266 - DS18B20
+![Test Image 1](ESP8266_normal_mode_DS18B20.png)
+
 ### end
