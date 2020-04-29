@@ -45,5 +45,6 @@
            
         picocom /dev/ttyUSB0 -b 115200
         --> cancel session press STRG + A + X  --> Thanks for using picocom
-           
+
+
 ### end
