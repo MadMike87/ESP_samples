@@ -31,6 +31,8 @@ client_id = ubinascii.hexlify(machine.unique_id())
 def do_connect():
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
+    # static IP-address
+    wlan.ifconfig(('192.168.1.82', '255.255.255.0', '192.168.1.254', '192.168.1.35'))
     if not wlan.isconnected():
         print('\n \t connecting to network...\n')
         wlan.connect(ssid, password)
